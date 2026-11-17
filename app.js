@@ -19,8 +19,64 @@ $$(".nav-item").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
 $$("[data-goto]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.goto)));
 function cardHTML(a,price,change){return `<article class="asset-card"><div class="asset-top"><div class="coin-id"><div class="coin-icon">${a.icon}</div><div><div class="coin-name">${a.name}</div><div class="coin-symbol">${a.symbol}</div></div></div><span class="signal ${a.wait?"wait":""}">${a.signal}</span></div><div class="price">${price||"—"}</div><div class="change ${change&&change.startsWith("-")?"down":""}">${change||"Cena se načítá"}</div><svg class="mini-chart" viewBox="0 0 300 40" preserveAspectRatio="none"><path d="M0 27 C25 24 35 31 60 20 S95 27 120 16 S155 24 180 14 S220 20 245 10 S275 18 300 6" fill="none" stroke="#6fa8ff" stroke-width="2.5" stroke-linecap="round"/></svg><div class="card-foot"><span>Analýza: ukázková</span><button class="text-link" data-asset="${a.id}">Proč sledovat? →</button></div></article>`}
 function renderDemo(){const html=demoAssets.map(a=>cardHTML(a,"Demo režim","Nejde o živý signál")).join("");$("#radarCards").innerHTML=html;$("#allRadar").innerHTML=demoAssets.map(a=>`<article class="radar-row"><div><div class="coin-name">${a.icon} ${a.name} <span class="coin-symbol">${a.symbol}</span></div><p>${a.reason}</p><p><b>Riziko:</b> ${a.risk}</p></div><button class="text-link" data-asset="${a.id}">Detail →</button></article>`).join("");bindAssets()}
-function bindAssets(){$$("[data-asset]").forEach(b=>b.addEventListener("click",()=>openAsset(b.dataset.asset)))}
-async function loadCrypto(){try{const r=await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=bitcoin,ethereum,solana&price_change_percentage=24h");if(!r.ok)throw Error("API");const data=await r.json();$("#cryptoStatus").textContent="Data dostupná";data.forEach(c=>{const a=demoAssets.find(x=>x.id===c.id);if(!a)return;const price=new Intl.NumberFormat("cs-CZ",{style:"currency",currency:"EUR",maximumFractionDigits:2}).format(c.current_price);const ch=(c.price_change_percentage_24h||0).toFixed(2);const card=document.querySelector(`[data-asset="${c.id}"]`)?.closest(".asset-card");if(card){const p=card.querySelector(".price"),change=card.querySelector(".change");if(p)p.textContent=price;if(change){change.textContent=(ch>=0?"+":"")+ch+" % za 24 h";change.classList.toggle("down",ch<0)}}});}catch(e){$("#cryptoStatus").textContent="Data nedostupná";}}
+function bindAssets(){$$("[data-asset]").forEach(b=>b.addEventListener("click",()=>openAsset(b.dataset.
+async function loadCrypto() {
+  try {
+    const response = await fetch(
+      "https://xeeyyjbhawpyvpvmvmjr.supabase.co/functions/v1/market-data"
+    );
+
+    if (!response.ok) throw new Error("API error");
+
+    const result = await response.json();
+
+    if (!result.success) throw new Error("Market data unavailable");
+
+    $("#cryptoStatus").textContent = "Živá data · CoinGecko";
+
+    const assets = {
+      bitcoin: result.assets.BTC,
+      ethereum: result.assets.ETH,
+      solana: result.assets.SOL
+    };
+
+    demoAssets.forEach(a => {
+      const data = assets[a.id];
+      if (!data || data.price === null) return;
+
+      const price = new Intl.NumberFormat("cs-CZ", {
+        style: "currency",
+        currency: "EUR",
+        maximumFractionDigits: 2
+      }).format(data.price);
+
+      const change = (data.change_24h * 100).toFixed(2);
+
+      const card = document.querySelector(
+        `#radarCards [data-asset="${a.id}"]`
+      )?.closest(".asset-card");
+
+      if (!card) return;
+
+      card.querySelector(".price").textContent = price;
+
+      const changeElement = card.querySelector(".change");
+
+      if (changeElement) {
+        changeElement.textContent =
+          (change >= 0 ? "+" : "") + change + " % za 24 h";
+
+        changeElement.classList.toggle("down", change < 0);
+      }
+    });
+
+  } catch (error) {
+    $("#cryptoStatus").textContent = "Data nedostupná";
+    console.error("MARKET AI:", error);
+  }
+}
+
+
 function openAsset(id){selectedAsset=demoAssets.find(a=>a.id===id);if(!selectedAsset)return;$("#assetDetail").innerHTML=`<div class="coin-id"><div class="coin-icon">${selectedAsset.icon}</div><div><div class="coin-name">${selectedAsset.name}</div><div class="coin-symbol">${selectedAsset.symbol}</div></div></div><div class="price">${selectedAsset.signal}</div><p class="muted">${selectedAsset.reason}</p><div class="section-heading"><h3>Proč tento signál?</h3></div><p class="muted">${selectedAsset.reason}</p><div class="section-heading"><h3>Na jaké riziko dát pozor?</h3></div><p class="muted">${selectedAsset.risk}</p><p class="eyebrow" style="margin-top:18px">STAV: DEMONSTRAČNÍ ANALÝZA · NEJDE O DOPORUČENÍ</p>`;$("#assetModal").classList.add("show")}
 $("#closeAsset").addEventListener("click",()=>$("#assetModal").classList.remove("show"));
 $("#buyDemo").addEventListener("click",()=>{$("#assetModal").classList.remove("show");$("#orderAsset").textContent=selectedAsset?selectedAsset.name:"—";$("#orderModal").classList.add("show");updateAmount()});
