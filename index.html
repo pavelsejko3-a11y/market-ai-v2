@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080d18">
+  <meta name="description" content="MARKET AI – srozumitelný přehled akcií, kryptoměn a investičních rizik.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>MARKET AI</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="MARKET AI – úvod"><span class="brand-mark">M</span><span>MARKET<span class="brand-ai"> AI</span></span></a>
+      <div class="top-actions"><span class="live-dot"></span><span class="tiny">TRŽNÍ PŘEHLED</span><button class="icon-btn" id="helpBtn" aria-label="Nápověda">?</button></div>
+    </header>
+
+    <main id="mainContent">
+      <section class="page active" id="page-home">
+        <div class="welcome-row"><div><p class="eyebrow" id="todayLabel">PŘEHLED TRHU</p><h1>Investování<br><span class="gradient-text">srozumitelně.</span></h1><p class="muted">Důležité informace bez zbytečně složitých pojmů.</p></div><div class="ai-orb"><span>AI</span></div></div>
+        <div class="market-strip">
+          <div><span class="muted small">KRYPTOMĚNY</span><strong id="cryptoStatus">Načítám data…</strong></div>
+          <div class="market-divider"></div>
+          <div><span class="muted small">AKCIE</span><strong class="amber">Připravujeme</strong></div>
+          <div class="market-divider"></div>
+          <div><span class="muted small">AI ANALÝZA</span><strong class="green">Demo režim</strong></div>
+        </div>
+
+        <div class="section-heading"><div><p class="eyebrow">MARKET AI RADAR</p><h2>Co stojí za pozornost</h2></div><span class="pill amber-pill">Ukázková analýza</span></div>
+        <div id="radarCards" class="cards-grid">
+          <article class="asset-card"><div class="skeleton"></div></article>
+          <article class="asset-card"><div class="skeleton"></div></article>
+        </div>
+        <div class="notice"><span class="notice-icon">i</span><p><b>Důležité:</b> Signály v této verzi jsou pouze ukázkové. Nejde o živá doporučení AI ani pokyn k nákupu. Před reálným investováním bude připojen ověřený zdroj dat a analytický backend.</p></div>
+        <div class="section-heading"><div><p class="eyebrow">JAK TO FUNGUJE</p><h2>Jednoduše ve 3 krocích</h2></div></div>
+        <div class="steps">
+          <div class="step"><span>01</span><div><b>AI sleduje trh</b><p>Vyhodnocuje ceny, trendy a důležité události.</p></div></div>
+          <div class="step"><span>02</span><div><b>Vysvětlí příležitost</b><p>Uvidíš důvody, rizika a co by mohlo názor změnit.</p></div></div>
+          <div class="step"><span>03</span><div><b>Rozhodneš se ty</b><p>Objednávku zkontroluješ a potvrdíš až po napojení brokera.</p></div></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-radar">
+        <p class="eyebrow">ANALYTICKÉ CENTRUM</p><h1>AI Radar</h1><p class="muted">Příležitosti, které stojí za další prověření.</p>
+        <div class="filter-row"><button class="filter active">Vše</button><button class="filter">Krypto</button><button class="filter">Akcie</button></div>
+        <div id="allRadar" class="stack"></div>
+        <div class="notice"><span class="notice-icon">i</span><p>Radar zatím zobrazuje demonstrační scénáře. Skutečné signály budou generovány až po napojení dat, AI a pravidel řízení rizika.</p></div>
+      </section>
+
+      <section class="page" id="page-portfolio">
+        <p class="eyebrow">TVÉ INVESTICE</p><h1>Portfolio</h1><p class="muted">Přehled hodnoty a rozložení investic.</p>
+        <div class="balance-card"><span class="muted small">CELKOVÁ HODNOTA PORTFOLIA</span><div class="balance">0,00 €</div><span class="muted small">Zatím nemáš připojený investiční účet.</span></div>
+        <div class="empty-state"><div class="empty-icon">◈</div><h3>Tvé portfolio čeká</h3><p>Až bude připojen broker, zobrazíme zde skutečné pozice, nákupní ceny, aktuální hodnotu a vývoj.</p><button class="primary-btn" data-goto="learn">Jak to bude fungovat</button></div>
+      </section>
+
+      <section class="page" id="page-learn">
+        <p class="eyebrow">INVESTIČNÍ AKADEMIE</p><h1>Nauč se investovat</h1><p class="muted">Krátce, jednoduše a bez finanční hantýrky.</p>
+        <div class="lesson-list">
+          <article class="lesson"><div class="lesson-icon">₿</div><div><b>Co je kryptoměna?</b><p>Digitální aktivum, jehož cena může výrazně kolísat.</p></div><span>›</span></article>
+          <article class="lesson"><div class="lesson-icon">↗</div><div><b>Co je akcie?</b><p>Malý vlastnický podíl ve společnosti.</p></div><span>›</span></article>
+          <article class="lesson"><div class="lesson-icon">⚖</div><div><b>Co znamená riziko?</b><p>Možnost, že hodnota investice klesne a proděláš.</p></div><span>›</span></article>
+          <article class="lesson"><div class="lesson-icon">⏳</div><div><b>Proč investovat dlouhodobě?</b><p>Krátkodobé pohyby jsou nejisté; čas může pomoci, ale výnos nezaručí.</p></div><span>›</span></article>
+        </div>
+        <div class="notice"><span class="notice-icon">i</span><p>Vzdělávací obsah nenahrazuje individuální finanční poradenství. Investuj pouze peníze, jejichž ztrátu si můžeš dovolit.</p></div>
+      </section>
+
+      <section class="page" id="page-profile">
+        <p class="eyebrow">NASTAVENÍ</p><h1>Můj účet</h1><p class="muted">Připravíme bezpečné přihlášení a propojení brokera.</p>
+        <div class="settings-list">
+          <div class="setting"><span>Osobní účet</span><span class="muted">Ve vývoji</span></div>
+          <div class="setting"><span>Broker a obchodování</span><span class="amber">Nepřipojeno</span></div>
+          <div class="setting"><span>Upozornění AI</span><span class="muted">Ve vývoji</span></div>
+          <div class="setting"><span>Jazyk</span><span>Čeština</span></div>
+        </div>
+        <button class="secondary-btn full" id="restartTour">Spustit průvodce znovu</button>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Hlavní navigace">
+      <button class="nav-item active" data-page="home"><span>⌂</span><small>Přehled</small></button>
+      <button class="nav-item" data-page="radar"><span>◉</span><small>AI Radar</small></button>
+      <button class="nav-item" data-page="portfolio"><span>▤</span><small>Portfolio</small></button>
+      <button class="nav-item" data-page="learn"><span>✳</span><small>Učení</small></button>
+      <button class="nav-item" data-page="profile"><span>☻</span><small>Účet</small></button>
+    </nav>
+  </div>
+
+  <div class="modal-backdrop" id="tourModal">
+    <div class="modal">
+      <div class="modal-top"><span class="brand-mark">M</span><button class="icon-btn" id="skipTour">Přeskočit</button></div>
+      <div class="tour-progress"><i id="tourProgress"></i></div>
+      <div class="tour-art"><div class="ai-orb large"><span>AI</span></div></div>
+      <p class="eyebrow" id="tourCount">VÍTEJ V MARKET AI · 1/4</p>
+      <h2 id="tourTitle">Investování bez složitostí</h2>
+      <p class="muted" id="tourText">MARKET AI ti pomůže porozumět trhu. Vysvětlíme ti důležité pojmy a ukážeme, na co se zaměřit.</p>
+      <div class="modal-actions"><button class="text-btn" id="prevTour">Zpět</button><button class="primary-btn" id="nextTour">Pokračovat</button></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="assetModal">
+    <div class="modal asset-modal">
+      <div class="modal-top"><span class="eyebrow">DETAIL AKTIVA</span><button class="icon-btn" id="closeAsset">×</button></div>
+      <div id="assetDetail"></div>
+      <div class="notice"><span class="notice-icon">i</span><p>Obchodování není aktivní. Toto tlačítko zatím otevře pouze ukázku objednávky, nikoli skutečný nákup.</p></div>
+      <button class="primary-btn full" id="buyDemo">Ukázat nákupní proces</button>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="orderModal">
+    <div class="modal">
+      <div class="modal-top"><span class="eyebrow">UKÁZKA OBJEDNÁVKY</span><button class="icon-btn" id="closeOrder">×</button></div>
+      <h2>Kolik chceš investovat?</h2>
+      <p class="muted">Zadej částku. Tato ukázka nic nekupuje a neodesílá žádnou objednávku.</p>
+      <label class="input-label" for="amount">Částka v EUR</label>
+      <input id="amount" class="amount-input" type="number" min="1" step="1" value="50">
+      <div class="order-summary"><span>Aktivum</span><b id="orderAsset">—</b><span>Částka</span><b id="orderAmount">50 €</b><span>Broker</span><b class="amber">Zatím nepřipojen</b></div>
+      <div class="notice"><span class="notice-icon">!</span><p>Skutečný nákup bude dostupný až po integraci brokera, ověření identity a potvrzení všech zákonných požadavků.</p></div>
+      <button class="primary-btn full" id="confirmDemo">Rozumím – jde jen o ukázku</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>

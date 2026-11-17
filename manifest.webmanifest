@@ -1,0 +1,11 @@
+{
+  "name": "MARKET AI",
+  "short_name": "MARKET AI",
+  "description": "Srozumitelný přehled investičních trhů",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080d18",
+  "theme_color": "#080d18",
+  "icons": []
+}
